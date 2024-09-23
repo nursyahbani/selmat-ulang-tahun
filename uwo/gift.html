@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PILIH HADIAHNYA</title>
+    <link rel="stylesheet" href="stylegift.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="gift-title">PILIH HADIAHNYA</h1>
+        <p class="message">pilih satu nanti di ss kirim ke Aku</p>
+
+        <!-- Tombol untuk mengacak hadiah -->
+        <button class="shuffle-btn" onclick="shuffleGifts()">clik di sini</button>
+
+        <!-- Area hadiah yang diacak -->
+        <div id="gift-area" class="gift-box">
+            <!-- Hadiah disembunyikan dengan tampilan dadu -->
+            <img src="dice.gif" alt="Shuffling..." class="dice-image" id="dice">
+        </div>
+
+        <!-- Tombol untuk melihat hadiah -->
+        <button class="reveal-btn hidden" id="reveal-btn" onclick="revealGift()">clik buat nampilin hadiah</button>
+
+        <!-- Tempat hadiah muncul -->
+        <div id="gift-result" class="hidden-gift-result"></div>
+    </div>
+
+    <script>
+        let gifts = [
+            {name: "di beliin roti ultah", image: "IMG_6581.JPG"},
+            {name: "zonk", image: "IMG_6668.JPG"},
+            {name: "saldo shopipay 100k aja dolo", image: "IMG_7086.JPG"}
+        ];
+
+        function shuffleGifts() {
+            // Tampilkan dadu sebagai tanda mengacak
+            document.getElementById('dice').style.display = 'block';
+            document.getElementById('reveal-btn').classList.add('hidden'); // Sembunyikan tombol "Reveal My Gift!"
+            document.getElementById('gift-result').innerHTML = ''; // Kosongkan area hasil
+
+            // Simulasikan pengacakan selama 2 detik
+            setTimeout(function() {
+                document.getElementById('dice').style.display = 'none'; // Sembunyikan dadu
+                document.getElementById('reveal-btn').classList.remove('hidden'); // Tampilkan tombol "Reveal My Gift!"
+            }, 2000);
+        }
+
+        function revealGift() {
+            // Pilih hadiah secara acak
+            let randomGift = gifts[Math.floor(Math.random() * gifts.length)];
+
+            // Tampilkan hadiah terpilih
+            let giftHTML = `
+                <div class="gift-item">
+                    <img src="${randomGift.image}" alt="${randomGift.name}" class="gift-photo">
+                    <p class="gift-name">${randomGift.name}</p>
+                </div>
+            `;
+            document.getElementById('gift-result').innerHTML = giftHTML;
+            document.getElementById('gift-result').classList.remove('hidden-gift-result');
+        }
+    </script>
+    </div>
+    <p class="message">kalo mau lanjjut clik ini<br> kalo ngga skip aja</p>
+    <button class="next-btn" onclick="goToGiftPage()">Click di sini ya</button>
+</div>
+
+<script>
+    function goToGiftPage() {
+        window.location.href = 'pageucapan.html'; // Mengarahkan ke halaman gift.html
+    }
+</script>
+</body>
+</html>
